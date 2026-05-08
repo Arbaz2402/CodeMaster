@@ -1,0 +1,14 @@
+# Netlify Deployment Configuration
+# This file tells Netlify how to handle your project
+
+[build]
+  # The directory containing your static files
+  publish = "CodeMaster"
+
+  # No build command needed for a vanilla HTML/JS project
+  command = ""
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
