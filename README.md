@@ -6,17 +6,17 @@ CodeMaster is a professional-grade, modern, and feature-rich coding learning pla
 
 ## 📸 Platform Overview
 
-| **Landing Page** | **Course Exploration** |
+| **Landing Page** | **Explore Categories** |
 |:---:|:---:|
-| ![Landing Page](assets/screenshots/landing.png) | ![Courses](assets/screenshots/courses.png) |
+| ![Landing Page](assets/screenshots/land.png) | ![Explore](assets/screenshots/Explore.png) |
 
-| **Coding Playground** | **Video Learning** |
+| **Course Catalog** | **Coding Playground** |
 |:---:|:---:|
-| ![Playground](assets/screenshots/playground.png) | ![Learning](assets/screenshots/learning.png) |
+| ![Courses](assets/screenshots/Courses.png) | ![Playground](assets/screenshots/playground.png) |
 
-| **Student Dashboard** | **Interactive Quiz** |
+| **Video Learning** | **Student Dashboard** |
 |:---:|:---:|
-| ![Dashboard](assets/screenshots/dashboard.png) | ![Quiz](assets/screenshots/quiz.png) |
+| ![Learning](assets/screenshots/learnings.png) | ![Dashboard](assets/screenshots/Dashboar.png) |
 
 ---
 
