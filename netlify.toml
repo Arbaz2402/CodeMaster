@@ -2,8 +2,8 @@
 # This file tells Netlify how to handle your project
 
 [build]
-  # The directory containing your static files
-  publish = "CodeMaster"
+  # Since the repo root is already inside CodeMaster/
+  publish = "."
 
   # No build command needed for a vanilla HTML/JS project
   command = ""
