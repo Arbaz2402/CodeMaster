@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning: React Hooks | CodeMaster</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/video-learning.css">
+</head>
+<body class="learning-body">
+
+    <!-- Header -->
+    <header class="learning-header glass">
+        <div class="mobile-menu-btn" style="margin-right: 20px;">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="header-left">
+            <a href="../index.html" class="logo" style="margin-right: 30px;">
+                <i class="fas fa-code"></i>
+                <span>Code<span>Master</span></span>
+            </a>
+            <ul class="nav-links" style="display: flex; gap: 20px; list-style: none; align-items: center;">
+                  <li><a href="../index.html" style="color: var(--text-secondary); font-size: 0.9rem; font-weight: 500;">Home</a></li>
+                   <li><a href="courses.html" style="color: var(--text-secondary); font-size: 0.9rem; font-weight: 500;">Courses</a></li>
+                   <li><a href="playground.html" style="color: var(--text-secondary); font-size: 0.9rem; font-weight: 500;">Playground</a></li>
+                   <li><a href="dashboard.html" style="color: var(--text-secondary); font-size: 0.9rem; font-weight: 500;">Dashboard</a></li>
+                   <li id="dynamic-lesson-title" style="margin-left: 20px; font-weight: 600; font-size: 1.1rem; color: var(--text-primary);">Full Stack React Mastery: Introduction to React Hooks</li>
+              </ul>
+        </div>
+        <div class="header-right">
+            <div class="learning-progress">
+                <span id="progress-text">Progress: 65%</span>
+                <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width: 65%;"></div></div>
+            </div>
+            <a href="dashboard.html" class="btn-primary btn-sm">Exit</a>
+        </div>
+    </header>
+
+    <main class="learning-container">
+        <!-- Video & Content Area -->
+        <div class="video-main">
+            <div class="video-player-container">
+                <!-- Mock Video Player -->
+                <div class="video-wrapper" style="position: relative; width: 100%; padding-bottom: 56.25%;">
+                    <iframe src="https://www.youtube.com/embed/O6P86uwfdR0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="content-tabs">
+                <div class="tabs-header">
+                    <button class="tab-btn active" data-tab="overview">Overview</button>
+                    <button class="tab-btn" data-tab="notes">Notes</button>
+                    <button class="tab-btn" data-tab="resources">Resources</button>
+                </div>
+                <div class="tab-content active" id="overview">
+                    <h3>About this lesson</h3>
+                    <p>In this lesson, we dive deep into the world of React Hooks. We'll explore why Hooks were introduced, how they simplify state management, and the rules of using them in functional components.</p>
+                    <div class="tags">
+                        <span>#React</span>
+                        <span>#Hooks</span>
+                        <span>#Frontend</span>
+                    </div>
+                </div>
+                <div class="tab-content" id="notes">
+                    <div class="notes-header">
+                        <h3>My Notes</h3>
+                        <button class="btn-primary btn-sm" id="save-note">Save Note</button>
+                    </div>
+                    <textarea id="note-area" placeholder="Take notes for this lesson..."></textarea>
+                </div>
+                <div class="tab-content" id="resources">
+                    <h3>Lesson Resources</h3>
+                    <ul class="resource-list">
+                        <li><a href="#"><i class="fas fa-file-pdf"></i> Lesson Slides.pdf</a></li>
+                        <li><a href="#"><i class="fas fa-file-code"></i> Source Code.zip</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Lesson List -->
+        <aside class="lesson-sidebar">
+            <div class="sidebar-title" style="display: flex; flex-direction: column; gap: 10px;">
+                <span>Course Content</span>
+                <select id="course-selector" style="padding: 8px; border-radius: 5px; background: rgba(255,255,255,0.05); color: #e2e8f0; border: 1px solid var(--glass-border); width: 100%; outline: none;">
+                    <option value="react" style="color: black;">Full Stack React Mastery</option>
+                    <option value="css" style="color: black;">Modern CSS Layouts</option>
+                    <option value="python" style="color: black;">Python for Data Science</option>
+                    <option value="js" style="color: black;">Advanced JavaScript</option>
+                </select>
+            </div>
+            <div class="lesson-list" id="lesson-list-container">
+                <!-- Videos will be injected here dynamically -->
+            </div>
+        </aside>
+    </main>
+
+    <script src="../js/video-learning.js"></script>
+</body>
+</html>

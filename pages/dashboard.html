@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | CodeMaster</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body class="dashboard-body">
+
+    <!-- Dashboard Sidebar -->
+    <aside class="dashboard-sidebar glass">
+        <div class="sidebar-header">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-code"></i>
+                <span>Code<span>Master</span></span>
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="dashboard.html" class="active"><i class="fas fa-th-large"></i> Overview</a></li>
+                <li><a href="courses.html"><i class="fas fa-book"></i> My Courses</a></li>
+                <li><a href="playground.html"><i class="fas fa-terminal"></i> Playground</a></li>
+                <li><a href="quiz.html"><i class="fas fa-question-circle"></i> Quizzes</a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <img src="https://ui-avatars.com/api/?name=User&background=random" alt="User">
+                <div>
+                    <p class="user-name">John Doe</p>
+                    <p class="user-status">Pro Member</p>
+                </div>
+            </div>
+            <a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <header class="dashboard-header">
+            <div class="mobile-menu-btn" style="margin-right: 20px;">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="header-left">
+                <h2>Welcome back, <span class="text-gradient">John!</span></h2>
+                <p>You have 2 lessons to complete today.</p>
+            </div>
+            <div class="header-right">
+                <div class="notification-btn"><i class="fas fa-bell"></i><span class="dot"></span></div>
+                <div class="streak-badge"><i class="fas fa-fire"></i> 15 Day Streak</div>
+            </div>
+        </header>
+
+        <!-- Stats Grid -->
+        <section class="dashboard-stats">
+            <div class="stat-card card">
+                <div class="stat-icon purple"><i class="fas fa-graduation-cap"></i></div>
+                <div>
+                    <h3>4</h3>
+                    <p>Courses in Progress</p>
+                </div>
+            </div>
+            <div class="stat-card card">
+                <div class="stat-icon blue"><i class="fas fa-check-circle"></i></div>
+                <div>
+                    <h3>12</h3>
+                    <p>Completed Lessons</p>
+                </div>
+            </div>
+            <div class="stat-card card">
+                <div class="stat-icon orange"><i class="fas fa-clock"></i></div>
+                <div>
+                    <h3>45h</h3>
+                    <p>Learning Time</p>
+                </div>
+            </div>
+            <div class="stat-card card">
+                <div class="stat-icon green"><i class="fas fa-medal"></i></div>
+                <div>
+                    <h3>8</h3>
+                    <p>Certificates</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analytics & Progress -->
+        <section class="dashboard-grid">
+            <div class="chart-container card">
+                <div class="card-header">
+                    <h3>Learning Activity</h3>
+                    <select>
+                        <option>This Week</option>
+                        <option>Last Week</option>
+                    </select>
+                </div>
+                <canvas id="activityChart"></canvas>
+            </div>
+
+            <div class="continue-learning card">
+                <h3>Continue Learning</h3>
+                <div class="course-progress-list">
+                    <div class="progress-item">
+                        <img src="https://picsum.photos/id/1/800/500" alt="React">
+                        <div class="progress-info">
+                            <div class="info-top">
+                                <h4>Full Stack React Mastery</h4>
+                                <span>65%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 65%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-item">
+                        <img src="https://picsum.photos/id/2/800/500" alt="Python">
+                        <div class="progress-info">
+                            <div class="info-top">
+                                <h4>Python for Data Science</h4>
+                                <span>40%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 40%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="courses.html" class="view-all">View All Courses <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </section>
+
+        <!-- Recent Achievements -->
+        <section class="achievements-section card">
+            <h3>Recent Achievements</h3>
+            <div class="achievements-grid">
+                <div class="achievement-item">
+                    <div class="badge-icon"><i class="fas fa-bolt"></i></div>
+                    <p>Fast Learner</p>
+                </div>
+                <div class="achievement-item">
+                    <div class="badge-icon"><i class="fas fa-code"></i></div>
+                    <p>Code Warrior</p>
+                </div>
+                <div class="achievement-item">
+                    <div class="badge-icon"><i class="fas fa-fire"></i></div>
+                    <p>7 Day Streak</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+/* Playground Styles */
+
+.playground-body {
+    background: #0b1120;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding-top: 0 !important;
+}
+
+.playground-header {
+    height: 70px;
+    padding: 0 30px;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--glass-border);
+    flex-shrink: 0;
+}
+
+.header-right {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 15px;
+}
+
+.project-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 30px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.project-title i {
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.user-avatar img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+/* Container */
+.playground-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Editor Section */
+.editor-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--glass-border);
+}
+
+.editor-tabs {
+    display: flex;
+    background: rgba(15, 23, 42, 0.5);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.editor-tab {
+    padding: 12px 25px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.85rem;
+    border-right: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.editor-tab.active {
+    background: var(--card-bg);
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+}
+
+.editor-tab i.fa-html5 { color: #e34f26; }
+.editor-tab i.fa-css3-alt { color: #1572b6; }
+.editor-tab i.fa-js { color: #f7df1e; }
+
+.editor-content {
+    flex: 1;
+    position: relative;
+}
+
+.code-input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    color: #e2e8f0;
+    padding: 20px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    resize: none;
+    outline: none;
+    display: none;
+}
+
+.code-input.active {
+    display: block;
+}
+
+/* Preview Section */
+.preview-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #f8fafc;
+}
+
+.preview-header {
+    height: 41px;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.preview-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.preview-actions button {
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.preview-window {
+    flex: 2;
+    background: white;
+}
+
+#preview-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.console-window {
+    flex: 1;
+    background: #0f172a;
+    border-top: 1px solid var(--glass-border);
+    display: flex;
+    flex-direction: column;
+}
+
+.console-header {
+    padding: 10px 15px;
+    background: rgba(255,255,255,0.05);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#console-output {
+    flex: 1;
+    padding: 15px;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    overflow-y: auto;
+    color: #94a3b8;
+}
+
+.system-msg {
+    color: #6366f1;
+}
+
+.console-input-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.02);
+    border-top: 1px solid var(--glass-border);
+}
+
+.console-input-wrapper span {
+    color: #6366f1;
+    margin-right: 10px;
+    font-family: 'Fira Code', monospace;
+    font-weight: bold;
+}
+
+#console-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #e2e8f0;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    outline: none;
+}
+
+@media (max-width: 768px) {
+    .playground-container {
+        flex-direction: column;
+    }
+    
+    .editor-section, .preview-section {
+        flex: 1;
+    }
+}

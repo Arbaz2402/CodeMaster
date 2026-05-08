@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeMaster | Master Your Future</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar glass">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-code"></i>
+                <span>Code<span>Master</span></span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="pages/courses.html">Courses</a></li>
+                <li><a href="pages/playground.html">Playground</a></li>
+                <li><a href="pages/video-learning.html">Learning</a></li>
+                <li><a href="pages/dashboard.html">Dashboard</a></li>
+            </ul>
+
+            <div class="nav-actions">
+            </div>
+
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content" data-aos="fade-right">
+                <h1 class="hero-title">
+                    Master Coding with <br>
+                    <span class="text-gradient" id="typing-text"></span>
+                </h1>
+                <p class="hero-subtitle">
+                    Join 100,000+ students learning the most in-demand technical skills from industry experts. Start your journey today!
+                </p>
+                <div class="hero-btns">
+                    <a href="pages/courses.html" class="btn-primary">Explore Courses <i class="fas fa-arrow-right"></i></a>
+                    <a href="pages/playground.html" class="btn-outline">Try Playground</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-num" data-target="150">0</span><span>+</span>
+                        <p>Courses</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num" data-target="100">0</span><span>K+</span>
+                        <p>Students</p>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num" data-target="500">0</span><span>+</span>
+                        <p>Hiring Partners</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image" data-aos="fade-left">
+                <div class="code-card glass">
+                    <div class="code-header">
+                        <span class="dot red"></span>
+                        <span class="dot yellow"></span>
+                        <span class="dot green"></span>
+                    </div>
+                    <div class="code-content">
+                        <pre><code><span class="keyword">function</span> <span class="function">CodeMaster</span>() {
+  <span class="keyword">const</span> [success, setSuccess] = <span class="function">useState</span>(<span class="boolean">true</span>);
+
+  <span class="keyword">return</span> (
+    &lt;<span class="tag">div</span> <span class="attr">className</span>=<span class="string">"future"</span>&gt;
+      &lt;<span class="tag">h1</span>&gt;Build Your Career&lt;/<span class="tag">h1</span>&gt;
+      &lt;<span class="tag">p</span>&gt;Learn by Doing&lt;/<span class="tag">p</span>&gt;
+    &lt;/<span class="tag">div</span>&gt;
+  );
+}</code></pre>
+                    </div>
+                </div>
+                <div class="floating-icons">
+                    <i class="fab fa-react icon-react"></i>
+                    <i class="fab fa-js icon-js"></i>
+                    <i class="fab fa-python icon-python"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Companies Section -->
+    <section class="companies">
+        <div class="container">
+            <p class="section-tag">Trusted by Top Tech Companies</p>
+            <div class="company-logos">
+                <i class="fab fa-google"></i>
+                <i class="fab fa-amazon"></i>
+                <i class="fab fa-microsoft"></i>
+                <i class="fab fa-apple"></i>
+                <i class="fab fa-meta"></i>
+                <i class="fab fa-netflix"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories section-padding">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Explore Top <span class="text-gradient">Categories</span></h2>
+                <p class="section-desc">Choose from a wide range of courses in various domains.</p>
+            </div>
+            <div class="category-grid">
+                <div class="category-card card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="cat-icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Web Development</h3>
+                    <p>React, Node, Next.js & more</p>
+                </div>
+                <div class="category-card card" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="cat-icon"><i class="fas fa-brain"></i></div>
+                    <h3>Data Science & AI</h3>
+                    <p>Python, ML, TensorFlow</p>
+                </div>
+                <div class="category-card card" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="cat-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Mobile Apps</h3>
+                    <p>Flutter, React Native, Swift</p>
+                </div>
+                <div class="category-card card" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="cat-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Cyber Security</h3>
+                    <p>Ethical Hacking, Network Sec</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Courses -->
+    <section class="featured-courses section-padding">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="section-title">Featured <span class="text-gradient">Courses</span></h2>
+                <div class="header-actions">
+                    <a href="pages/courses.html" class="view-all">View All <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+            <div class="course-grid">
+                <!-- Course 1 -->
+                <div class="course-card" data-aos="fade-up" data-aos-delay="100" onclick="window.location.href='pages/course-detail.html'">
+                    <div class="course-img">
+                        <img src="https://picsum.photos/id/1/800/500" alt="React">
+                        <span class="badge">Advanced</span>
+                    </div>
+                    <div class="course-info">
+                        <div class="course-meta">
+                            <span><i class="fas fa-star"></i> 4.9</span>
+                            <span><i class="fas fa-users"></i> 12k</span>
+                        </div>
+                        <h3>Full Stack React Mastery</h3>
+                        <p>Master React from basics to advanced patterns like Hooks and Context API.</p>
+                        <div class="course-footer">
+                            <span class="price">$89.99</span>
+                            <a href="pages/course-detail.html" class="btn-sm" onclick="event.stopPropagation()">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Course 2 -->
+                <div class="course-card" data-aos="fade-up" data-aos-delay="200" onclick="window.location.href='pages/course-detail.html'">
+                    <div class="course-img">
+                        <img src="https://picsum.photos/id/2/800/500" alt="Python">
+                        <span class="badge">Beginner</span>
+                    </div>
+                    <div class="course-info">
+                        <div class="course-meta">
+                            <span><i class="fas fa-star"></i> 4.8</span>
+                            <span><i class="fas fa-users"></i> 25k</span>
+                        </div>
+                        <h3>Python for Data Science</h3>
+                        <p>Learn Python fundamentals and how to use Pandas, NumPy, and Matplotlib.</p>
+                        <div class="course-footer">
+                            <span class="price">$74.99</span>
+                            <a href="pages/course-detail.html" class="btn-sm" onclick="event.stopPropagation()">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Course 3 -->
+                <div class="course-card" data-aos="fade-up" data-aos-delay="300" onclick="window.location.href='pages/course-detail.html'">
+                    <div class="course-img">
+                        <img src="https://picsum.photos/id/3/800/500" alt="Algorithms">
+                        <span class="badge">Intermediate</span>
+                    </div>
+                    <div class="course-info">
+                        <div class="course-meta">
+                            <span><i class="fas fa-star"></i> 4.9</span>
+                            <span><i class="fas fa-users"></i> 8k</span>
+                        </div>
+                        <h3>DSA Mastery Bootcamp</h3>
+                        <p>Ace your technical interviews with deep dives into algorithms and data structures.</p>
+                        <div class="course-footer">
+                            <span class="price">$99.99</span>
+                            <a href="pages/course-detail.html" class="btn-sm" onclick="event.stopPropagation()">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-code"></i>
+                    <span>Code<span>Master</span></span>
+                </a>
+                <p>Empowering the next generation of developers with world-class education.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="pages/courses.html">Browse Courses</a></li>
+                    <li><a href="pages/playground.html">Playground</a></li>
+                    <li><a href="#">Success Stories</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-newsletter">
+                <h4>Subscribe</h4>
+                <p>Get the latest updates on new courses.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Email address">
+                    <button type="submit" class="btn-primary">Join</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CodeMaster Education. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- GSAP & AOS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/landing.js"></script>
+</body>
+</html>

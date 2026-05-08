@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses | CodeMaster</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/courses.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar glass">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-code"></i>
+                <span>Code<span>Master</span></span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="courses.html" class="active">Courses</a></li>
+                <li><a href="playground.html">Playground</a></li>
+                <li><a href="video-learning.html">Learning</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+
+            <div class="nav-actions">
+            </div>
+
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <main class="courses-page section-padding">
+        <div class="container">
+            <!-- Search & Header -->
+            <div class="courses-header" data-aos="fade-down">
+                <h1>Browse Our <span class="text-gradient">Courses</span></h1>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="course-search" placeholder="Search for courses, skills, or mentors...">
+                    <button class="btn-primary">Search</button>
+                </div>
+            </div>
+
+            <div class="courses-layout">
+                <!-- Sidebar Filters -->
+                <aside class="filters-sidebar" data-aos="fade-right">
+                    <div class="filter-section">
+                        <h3>Categories</h3>
+                        <div class="filter-options">
+                            <label class="checkbox-container">
+                                <input type="checkbox" checked> Web Development
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox"> Data Science
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox"> Mobile Apps
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox"> UI/UX Design
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Level</h3>
+                        <div class="filter-options">
+                            <label class="checkbox-container">
+                                <input type="checkbox"> Beginner
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox"> Intermediate
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox"> Advanced
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-section">
+                        <h3>Rating</h3>
+                        <div class="filter-options">
+                            <label class="checkbox-container">
+                                <input type="checkbox" value="4.5"> 4.5 & Up
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" value="4.0"> 4.0 & Up
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Course Grid -->
+                <div class="courses-content">
+                    <div class="sort-bar">
+                        <p>Showing <span id="course-count">12</span> courses</p>
+                        <div class="sort-options">
+                            <span>Sort by:</span>
+                            <select id="sort-select">
+                                <option value="popular">Most Popular</option>
+                                <option value="newest">Newest</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="course-grid" id="course-grid">
+                        <!-- Courses will be dynamically populated here or static for now -->
+                        <div class="course-card card" data-aos="fade-up">
+                            <div class="course-img">
+                                <img src="https://picsum.photos/id/4/800/500" alt="Course">
+                                <span class="badge difficulty">Intermediate</span>
+                            </div>
+                            <div class="course-info">
+                                <div class="course-meta">
+                                    <span><i class="fas fa-star"></i> 4.9</span>
+                                    <span><i class="fas fa-clock"></i> 24h total</span>
+                                </div>
+                                <h3>Modern JavaScript Deep Dive</h3>
+                                <p>Master ES6+, Async/Await, Closures and more in this comprehensive guide.</p>
+                                <div class="course-footer">
+                                    <span class="price">$49.99</span>
+                                    <a href="course-detail.html" class="btn-sm">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Add more cards as needed... -->
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <button class="page-btn active">1</button>
+                        <button class="page-btn">2</button>
+                        <button class="page-btn">3</button>
+                        <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-bottom">
+            <p>&copy; 2026 CodeMaster Education. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/courses.js"></script>
+</body>
+</html>

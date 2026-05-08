@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | CodeMaster</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/profile.css">
+</head>
+<body class="dashboard-body">
+
+    <!-- Sidebar (Same as dashboard) -->
+    <aside class="dashboard-sidebar glass">
+        <div class="sidebar-header">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-code"></i>
+                <span>Code<span>Master</span></span>
+            </a>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="dashboard.html"><i class="fas fa-th-large"></i> Overview</a></li>
+                <li><a href="courses.html"><i class="fas fa-book"></i> My Courses</a></li>
+                <li><a href="playground.html"><i class="fas fa-terminal"></i> Playground</a></li>
+                <li><a href="quiz.html"><i class="fas fa-question-circle"></i> Quizzes</a></li>
+                <li><a href="profile.html" class="active"><i class="fas fa-user"></i> Profile</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="dashboard-main">
+        <header class="dashboard-header" style="margin-bottom: 20px;">
+            <div class="mobile-menu-btn" style="margin-right: 20px;">
+                <i class="fas fa-bars"></i>
+            </div>
+            <h2>Profile Settings</h2>
+        </header>
+        <div class="profile-header card">
+            <div class="profile-cover"></div>
+            <div class="profile-info-main">
+                <div class="profile-img-container">
+                    <img src="https://ui-avatars.com/api/?name=John+Doe&background=random" alt="User">
+                    <button class="edit-avatar"><i class="fas fa-camera"></i></button>
+                </div>
+                <div class="profile-text">
+                    <div class="name-row">
+                        <h1 id="display-name">John Doe</h1>
+                        <span class="badge difficulty">Pro Member</span>
+                    </div>
+                    <p id="display-bio">Full Stack Developer & Lifelong Learner</p>
+                    <div class="profile-stats">
+                        <span><strong>12</strong> Courses</span>
+                        <span><strong>45</strong> Projects</span>
+                        <span><strong>1.2k</strong> Points</span>
+                    </div>
+                </div>
+                <button class="btn-primary" id="edit-profile-btn">Edit Profile</button>
+            </div>
+        </div>
+
+        <div class="profile-grid">
+            <div class="profile-left">
+                <!-- About -->
+                <section class="card about-section">
+                    <h3>About Me</h3>
+                    <p id="display-about">I'm a self-taught developer passionate about building modern web applications. Currently focusing on React, Node.js, and cloud technologies.</p>
+                    <div class="skills-tags">
+                        <span>React</span>
+                        <span>JavaScript</span>
+                        <span>Node.js</span>
+                        <span>Python</span>
+                        <span>AWS</span>
+                    </div>
+                </section>
+
+                <!-- Achievements -->
+                <section class="card achievements-section">
+                    <h3>Achievements</h3>
+                    <div class="badges-grid">
+                        <div class="badge-item">
+                            <div class="badge-icon purple"><i class="fas fa-fire"></i></div>
+                            <p>7 Day Streak</p>
+                        </div>
+                        <div class="badge-item">
+                            <div class="badge-icon blue"><i class="fas fa-code"></i></div>
+                            <p>Code Master</p>
+                        </div>
+                        <div class="badge-item">
+                            <div class="badge-icon green"><i class="fas fa-check-circle"></i></div>
+                            <p>Course Finisher</p>
+                        </div>
+                        <div class="badge-item">
+                            <div class="badge-icon orange"><i class="fas fa-medal"></i></div>
+                            <p>Quiz Hero</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="profile-right">
+                <!-- Activity -->
+                <section class="card activity-section">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon"><i class="fas fa-play"></i></div>
+                            <div class="activity-desc">
+                                <p>Completed <strong>React Hooks</strong> lesson</p>
+                                <span>2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon"><i class="fas fa-trophy"></i></div>
+                            <div class="activity-desc">
+                                <p>Earned <strong>Quiz Hero</strong> badge</p>
+                                <span>Yesterday</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon"><i class="fas fa-code"></i></div>
+                            <div class="activity-desc">
+                                <p>Started a new project in <strong>Playground</strong></p>
+                                <span>3 days ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Certificates -->
+                <section class="card certificates-section">
+                    <h3>Certificates</h3>
+                    <div class="cert-list">
+                        <div class="cert-item">
+                            <i class="fas fa-certificate"></i>
+                            <div>
+                                <h4>Modern JavaScript</h4>
+                                <span>Issued May 2026</span>
+                            </div>
+                            <a href="#"><i class="fas fa-download"></i></a>
+                        </div>
+                        <div class="cert-item">
+                            <i class="fas fa-certificate"></i>
+                            <div>
+                                <h4>Web Fundamentals</h4>
+                                <span>Issued April 2026</span>
+                            </div>
+                            <a href="#"><i class="fas fa-download"></i></a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Edit Profile Modal -->
+    <div id="edit-profile-modal" class="modal">
+        <div class="modal-content glass">
+            <div class="modal-header">
+                <h3>Edit Profile</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <form id="edit-profile-form">
+                <div class="form-group">
+                    <label for="edit-name">Full Name</label>
+                    <input type="text" id="edit-name" value="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-bio">Headline / Bio</label>
+                    <textarea id="edit-bio" rows="2" required>Full Stack Developer & Lifelong Learner</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="edit-about">About Me</label>
+                    <textarea id="edit-about" rows="4" required>I'm a self-taught developer passionate about building modern web applications. Currently focusing on React, Node.js, and cloud technologies.</textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-outline close-modal-btn">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/profile.js"></script>
+</body>
+</html>
