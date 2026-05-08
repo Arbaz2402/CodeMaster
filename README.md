@@ -70,11 +70,11 @@ CodeMaster/
 
 ---
 
-## � Getting Started
+## 🚀 Getting Started
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/CodeMaster.git
+   git clone https://github.com/Arbaz2402/CodeMaster.git
    ```
 2. **Launch**: Open `index.html` in your browser (Recommended: Use VS Code Live Server for the best experience).
 3. **Explore**: Navigate through the courses, try the playground, and complete a quiz!
