@@ -4,7 +4,12 @@ CodeMaster is a professional-grade, modern, and feature-rich coding learning pla
 
 ---
 
-## 📸 Platform Overview
+## � Live Preview
+**Experience CodeMaster live at:** [https://codemaster24.netlify.app/](https://codemaster24.netlify.app/)
+
+---
+
+## �📸 Platform Overview
 
 | **Landing Page** | **Explore Categories** |
 |:---:|:---:|
@@ -70,7 +75,7 @@ CodeMaster/
 
 ---
 
-## 🚀 Getting Started
+## � Getting Started
 
 1. **Clone the Repository**:
    ```bash
