@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Full Stack React Mastery | CodeMaster</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/course-detail.css">
@@ -24,7 +24,7 @@
                 <li><a href="video-learning.html">Learning</a></li>
                 <li><a href="dashboard.html">Dashboard</a></li>
             </ul>
-            <div class="nav-actions">
+            <div class="nav-actions" id="nav-actions">
             </div>
         </div>
     </nav>
@@ -169,6 +169,35 @@
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
     <script src="../js/course-detail.js"></script>
+    <script>
+        // Check if user is logged in
+        function checkAuth() {
+            const user = getUser();
+            const navActions = document.getElementById('nav-actions');
+            if (user) {
+                navActions.innerHTML = `
+                    <a href="profile.html" class="btn-outline btn-sm">${user.name}</a>
+                    <button class="btn-primary btn-sm" id="logout-btn">Log Out</button>
+                `;
+                document.getElementById('logout-btn').addEventListener('click', () => {
+                    removeToken();
+                    removeUser();
+                    checkAuth();
+                });
+            } else {
+                navActions.innerHTML = `
+                    <button class="btn-outline btn-sm" id="login-btn">Log In</button>
+                    <button class="btn-primary btn-sm" id="register-btn">Sign Up</button>
+                `;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuth();
+        });
+    </script>
 </body>
 </html>
