@@ -1,59 +1,7 @@
 /* Quiz JS */
 
-const quizData = [
-    {
-        question: "What is the primary purpose of the useState hook?",
-        options: [
-            "To handle side effects in functional components",
-            "To add state to functional components",
-            "To optimize performance",
-            "To navigate between routes"
-        ],
-        correct: 1
-    },
-    {
-        question: "Which hook would you use to perform a side effect like fetching data?",
-        options: [
-            "useState",
-            "useContext",
-            "useEffect",
-            "useReducer"
-        ],
-        correct: 2
-    },
-    {
-        question: "What must you pass as the second argument to useEffect to run it only once?",
-        options: [
-            "The component name",
-            "An empty array []",
-            "null",
-            "The state variable"
-        ],
-        correct: 1
-    },
-    {
-        question: "Can you use Hooks inside a class component?",
-        options: [
-            "Yes, always",
-            "Yes, but only useState",
-            "No, hooks are only for functional components",
-            "Only in specific React versions"
-        ],
-        correct: 2
-    },
-    {
-        question: "What is the correct way to update state using useState?",
-        options: [
-            "state = newValue",
-            "setState(newValue)",
-            "updateState(newValue)",
-            "this.setState(newValue)"
-        ],
-        correct: 1
-    }
-];
-
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    let quizData = [];
     let currentQuestion = 0;
     let score = 0;
     let timer = 120;
@@ -68,8 +16,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const timerText = document.getElementById('timer');
     const quizScreen = document.getElementById('quiz-screen');
     const resultScreen = document.getElementById('result-screen');
+    const quizTitle = document.querySelector('.quiz-info h2');
 
-    totalQText.textContent = quizData.length;
+    // Get courseId from URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseId = urlParams.get('courseId');
+
+    // Load quiz data from backend
+    const loadQuizData = async () => {
+        try {
+            if (courseId) {
+                quizData = await quizzesApi.getByCourseId(courseId);
+                if (quizTitle && quizData.length > 0) {
+                    quizTitle.textContent = `${quizData[0].title} Quiz`;
+                }
+            } else {
+                // Load all quizzes if no courseId, use first one
+                const allQuizzes = await quizzesApi.getAll();
+                quizData = allQuizzes[0]?.questions || [];
+                if (quizTitle && allQuizzes[0]) {
+                    quizTitle.textContent = `${allQuizzes[0].title} Quiz`;
+                }
+            }
+
+            if (quizData.length === 0) {
+                alert('No quiz found!');
+                window.location.href = 'dashboard.html';
+                return;
+            }
+
+            totalQText.textContent = quizData.length;
+            loadQuestion();
+            startTimer();
+        } catch (error) {
+            console.error('Failed to load quiz:', error);
+            alert('Failed to load quiz');
+            window.location.href = 'dashboard.html';
+        }
+    };
 
     function startTimer() {
         timerInterval = setInterval(() => {
@@ -141,6 +125,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initialize
-    loadQuestion();
-    startTimer();
+    loadQuizData();
 });
