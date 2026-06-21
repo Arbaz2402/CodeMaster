@@ -55,7 +55,12 @@ router.post('/:id/enroll', auth, async (req, res) => {
 router.get('/user/enrolled', auth, async (req, res) => {
   try {
     const enrollments = await Enrollment.find({ userId: req.user.id }).populate('courseId');
-    res.json(enrollments);
+    // Map to frontend-friendly format
+    const formattedEnrollments = enrollments.map(e => ({
+      ...e._doc,
+      course: e.courseId
+    }));
+    res.json(formattedEnrollments);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }

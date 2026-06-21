@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const lessonSchema = new mongoose.Schema({
   title: { type: String, required: true },
   duration: { type: String, required: true },
-  url: { type: String, required: true },
+  videoUrl: { type: String, required: true },
   order: { type: Number, required: true }
 });
 
@@ -32,7 +32,7 @@ const courseSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  img: {
+  image: {
     type: String,
     required: true
   },

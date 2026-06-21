@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
         rating: 4.9,
         students: "12k",
         price: 89.99,
-        img: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80",
         desc: "Build highly scalable, production-ready web applications with React, Node.js, and modern tools. Learn by building real-world projects.",
         learningKey: "react",
         lessons: [
@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
         rating: 4.8,
         students: "25k",
         price: 74.99,
-        img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80",
         desc: "Learn Python programming and explore data analysis, visualization, and machine learning techniques.",
         learningKey: "python",
         lessons: [
@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
         rating: 4.7,
         students: "15k",
         price: 59.99,
-        img: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80",
+        image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=800&q=80",
         desc: "Master the principles of user interface and user experience design to create beautiful, functional products.",
         learningKey: "css",
         lessons: [
@@ -70,7 +70,7 @@ router.post('/', async (req, res) => {
         rating: 4.9,
         students: "8k",
         price: 99.99,
-        img: "https://images.unsplash.com/photo-1537432376769-00f5c2f4c8d2?w=800&q=80",
+        image: "https://images.unsplash.com/photo-1537432376769-00f5c2f4c8d2?w=800&q=80",
         desc: "Deep dive into Node.js architecture, performance optimization, and enterprise-grade design patterns.",
         learningKey: "js",
         lessons: [
