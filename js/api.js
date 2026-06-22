@@ -63,7 +63,26 @@ const authApi = {
     body: JSON.stringify({ email, password })
   }),
   
-  getMe: () => apiFetch('/auth/me')
+  getMe: () => apiFetch('/auth/me'),
+  
+  confirmEmail: (token) => apiFetch('/auth/confirm-email', {
+    method: 'POST',
+    body: JSON.stringify({ token })
+  }),
+  
+  resendConfirmation: () => apiFetch('/auth/resend-confirmation', {
+    method: 'POST'
+  }),
+  
+  forgotPassword: (email) => apiFetch('/auth/forgot-password', {
+    method: 'POST',
+    body: JSON.stringify({ email })
+  }),
+  
+  resetPassword: (token, newPassword) => apiFetch('/auth/reset-password', {
+    method: 'POST',
+    body: JSON.stringify({ token, newPassword })
+  })
 };
 
 // Courses API
@@ -81,9 +100,29 @@ const usersApi = {
     method: 'PUT',
     body: JSON.stringify(profileData)
   }),
-  updateActivity: (day, hours) => apiFetch('/users/activity', {
+  updateActivity: (day, hours, description) => apiFetch('/users/activity', {
     method: 'PUT',
-    body: JSON.stringify({ day, hours })
+    body: JSON.stringify({ day, hours, description })
+  }),
+  addRecentActivity: (type, description) => apiFetch('/users/activity/recent', {
+    method: 'POST',
+    body: JSON.stringify({ type, description })
+  }),
+  getSkills: () => apiFetch('/users/skills'),
+  addSkill: (skill) => apiFetch('/users/skills', {
+    method: 'POST',
+    body: JSON.stringify({ skill })
+  }),
+  removeSkill: (skill) => apiFetch(`/users/skills/${skill}`, {
+    method: 'DELETE'
+  }),
+  addAchievement: (title, icon, color) => apiFetch('/users/achievements', {
+    method: 'POST',
+    body: JSON.stringify({ title, icon, color })
+  }),
+  addCertificate: (courseId, courseTitle, certificateUrl) => apiFetch('/users/certificates', {
+    method: 'POST',
+    body: JSON.stringify({ courseId, courseTitle, certificateUrl })
   })
 };
 

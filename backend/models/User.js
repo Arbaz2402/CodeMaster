@@ -15,6 +15,26 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  emailConfirmed: {
+    type: Boolean,
+    default: false
+  },
+  confirmationToken: {
+    type: String,
+    default: null
+  },
+  confirmationTokenExpires: {
+    type: Date,
+    default: null
+  },
+  resetToken: {
+    type: String,
+    default: null
+  },
+  resetTokenExpires: {
+    type: Date,
+    default: null
+  },
   bio: {
     type: String,
     default: ''
@@ -27,6 +47,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: ''
   },
+  skills: [{
+    type: String
+  }],
   streak: {
     type: Number,
     default: 0
@@ -39,12 +62,31 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  points: {
+    type: Number,
+    default: 0
+  },
   achievements: [{
-    type: String
+    title: { type: String, required: true },
+    icon: { type: String, default: 'fa-medal' },
+    color: { type: String, default: 'purple' },
+    earnedAt: { type: Date, default: Date.now }
+  }],
+  certificates: [{
+    courseId: { type: mongoose.Schema.Types.ObjectId, ref: 'Course' },
+    courseTitle: { type: String, required: true },
+    issuedAt: { type: Date, default: Date.now },
+    certificateUrl: { type: String, default: '' }
   }],
   activityData: [{
     day: { type: String, required: true },
-    hours: { type: Number, default: 0 }
+    hours: { type: Number, default: 0 },
+    description: { type: String, default: '' }
+  }],
+  recentActivity: [{
+    type: { type: String, enum: ['lesson', 'quiz', 'achievement', 'project'], required: true },
+    description: { type: String, required: true },
+    timestamp: { type: Date, default: Date.now }
   }],
   createdAt: {
     type: Date,
