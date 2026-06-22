@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://codemaster-backend-20m.onrender.com/api';
+const API_BASE_URL = 'https://codemaster-backend-2o0m.onrender.com/api';
 
 // Helper to get stored token
 const getToken = () => localStorage.getItem('codemaster_token');
