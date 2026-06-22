@@ -310,25 +310,7 @@ button {
   const projectTitleInput = document.getElementById('project-title');
   const projectsList = document.getElementById('projects-list');
 
-  // Load user data
-  const localUser = getUser();
-  if (localUser) {
-    try {
-      user = await authApi.getMe();
-      setUser(user);
-      // Update avatar
-      if (user && user.name) {
-        const formattedName = user.name.trim().replace(/\s+/g, '+');
-        userAvatarImg.src = `https://ui-avatars.com/api/?name=${formattedName}&background=random`;
-      }
-    } catch (error) {
-      user = localUser;
-      if (user && user.name) {
-        const formattedName = user.name.trim().replace(/\s+/g, '+');
-        userAvatarImg.src = `https://ui-avatars.com/api/?name=${formattedName}&background=random`;
-      }
-    }
-  }
+  // User data is handled by main.js's fetchAndUpdateUser and updateNavbar
 
   // Load projects
   const loadProjects = async () => {
