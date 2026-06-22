@@ -141,3 +141,18 @@ const notesApi = {
     body: JSON.stringify({ lessonId, courseId, content })
   })
 };
+
+// Playgrounds API
+const playgroundsApi = {
+  getAll: () => apiFetch('/playgrounds'),
+  getById: (id) => apiFetch(`/playgrounds/${id}`),
+  create: (projectData) => apiFetch('/playgrounds', {
+    method: 'POST',
+    body: JSON.stringify(projectData)
+  }),
+  update: (id, projectData) => apiFetch(`/playgrounds/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(projectData)
+  }),
+  delete: (id) => apiFetch(`/playgrounds/${id}`, { method: 'DELETE' })
+};

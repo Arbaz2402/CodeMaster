@@ -28,6 +28,7 @@ const userRoutes = require('./routes/users');
 const quizRoutes = require('./routes/quizzes');
 const noteRoutes = require('./routes/notes');
 const seedRoutes = require('./routes/seed');
+const playgroundRoutes = require('./routes/playgrounds');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
@@ -35,6 +36,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/quizzes', quizRoutes);
 app.use('/api/notes', noteRoutes);
 app.use('/api/seed', seedRoutes);
+app.use('/api/playgrounds', playgroundRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
