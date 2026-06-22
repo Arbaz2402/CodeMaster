@@ -47,38 +47,56 @@ document.addEventListener('DOMContentLoaded', async () => {
       
       // Render skills
       if (skillsContainer) {
+        // Clear the container first
+        skillsContainer.innerHTML = '';
+        
+        // Add skill tags
         if (user.skills && user.skills.length > 0) {
-          skillsContainer.innerHTML = user.skills.map(skill => `
-            <span class="skill-tag">
+          user.skills.forEach(skill => {
+            const skillTag = document.createElement('span');
+            skillTag.className = 'skill-tag';
+            skillTag.innerHTML = `
               ${skill}
-              <button class="remove-skill-btn" data-skill="${skill}">&times;</button>
-            </span>
-          `).join('');
+              <button class="remove-skill-btn" data-skill="${skill}">
+                <i class="fas fa-times"></i>
+              </button>
+            `;
+            skillsContainer.appendChild(skillTag);
+          });
           
-          // Add remove skill buttons
+          // Add remove skill buttons event listeners
           document.querySelectorAll('.remove-skill-btn').forEach(btn => {
             btn.addEventListener('click', async (e) => {
-              const skill = e.target.dataset.skill;
+              e.stopPropagation();
+              const skill = e.currentTarget.dataset.skill;
               await removeSkill(skill);
             });
           });
         } else {
-          skillsContainer.innerHTML = '<p style="color: #94a3b8;">No skills added yet</p>';
+          const emptyMsg = document.createElement('p');
+          emptyMsg.style.color = '#94a3b8';
+          emptyMsg.textContent = 'No skills added yet';
+          skillsContainer.appendChild(emptyMsg);
         }
         
-        // Add skill input
-        const addSkillHtml = `
-          <div class="add-skill-container" style="margin-top: 10px;">
+        // Check if add skill container already exists before adding it
+        let addSkillContainer = document.querySelector('.add-skill-container');
+        if (!addSkillContainer) {
+          addSkillContainer = document.createElement('div');
+          addSkillContainer.className = 'add-skill-container';
+          addSkillContainer.style.marginTop = '10px';
+          addSkillContainer.innerHTML = `
             <input type="text" id="new-skill-input" placeholder="Add a skill" style="padding: 8px 12px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.05); color: white; width: 200px;">
             <button id="add-skill-btn" style="margin-left: 8px; padding: 8px 16px; background: #6366f1; border: none; border-radius: 20px; color: white; cursor: pointer;">Add</button>
-          </div>
-        `;
-        skillsContainer.insertAdjacentHTML('afterend', addSkillHtml);
-        
-        document.getElementById('add-skill-btn').addEventListener('click', addSkill);
-        document.getElementById('new-skill-input').addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') addSkill();
-        });
+          `;
+          skillsContainer.parentElement.appendChild(addSkillContainer);
+          
+          // Add event listeners
+          document.getElementById('add-skill-btn').addEventListener('click', addSkill);
+          document.getElementById('new-skill-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') addSkill();
+          });
+        }
       }
       
       // Render achievements
