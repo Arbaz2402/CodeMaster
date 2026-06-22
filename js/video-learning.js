@@ -191,14 +191,37 @@ document.addEventListener('DOMContentLoaded', async () => {
     const attachLessonListeners = () => {
         const items = document.querySelectorAll('.lesson-item');
         items.forEach(item => {
-            item.addEventListener('click', async () => {
+            // Click on the icon to toggle completion
+            const icon = item.querySelector('.lesson-info i');
+            if (icon) {
+                icon.addEventListener('click', async (e) => {
+                    e.stopPropagation(); // Don't trigger the lesson click
+                    const lessonId = item.getAttribute('data-lesson-id');
+                    
+                    try {
+                        await coursesApi.completeLesson(currentCourseId, lessonId);
+                        // Reload enrollment to update progress
+                        const enrolledCourses = await coursesApi.getEnrolled();
+                        currentEnrollment = enrolledCourses.find(e => e.course._id === currentCourseId);
+                        renderCourse();
+                    } catch (error) {
+                        console.error('Failed to toggle lesson completion:', error);
+                    }
+                });
+            }
+            
+            // Click on the lesson item to switch active lesson
+            item.addEventListener('click', async (e) => {
+                // Don't trigger if clicking on the icon
+                if (e.target.closest('.lesson-info i')) return;
+                
                 // Remove active from all
                 items.forEach(i => {
                     i.classList.remove('active');
-                    const icon = i.querySelector('.lesson-info i');
-                    if (icon) {
+                    const iconEl = i.querySelector('.lesson-info i');
+                    if (iconEl) {
                         const isCompleted = i.classList.contains('completed');
-                        icon.className = isCompleted ? 'fas fa-check-circle' : 'far fa-circle';
+                        iconEl.className = isCompleted ? 'fas fa-check-circle' : 'far fa-circle';
                     }
                 });
 
@@ -223,17 +246,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // Update Video
                 if (videoIframe && lesson) {
                     videoIframe.src = lesson.videoUrl;
-                }
-
-                // Mark lesson as completed
-                try {
-                    await coursesApi.completeLesson(currentCourseId, currentLessonId);
-                    // Reload enrollment to update progress
-                    const enrolledCourses = await coursesApi.getEnrolled();
-                    currentEnrollment = enrolledCourses.find(e => e.course._id === currentCourseId);
-                    renderCourse();
-                } catch (error) {
-                    console.error('Failed to mark lesson as completed:', error);
                 }
             });
         });

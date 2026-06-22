@@ -260,8 +260,20 @@
     font-size: 1.1rem;
 }
 
+.lesson-item.completed {
+    background: rgba(16, 185, 129, 0.05);
+}
+
 .lesson-item.completed i {
     color: #10b981;
+}
+
+.lesson-item.completed .lesson-info span {
+    color: #10b981;
+}
+
+.lesson-item.completed .duration {
+    color: rgba(16, 185, 129, 0.7);
 }
 
 .lesson-item.active i {

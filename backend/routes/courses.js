@@ -120,17 +120,23 @@ router.put('/:courseId/lessons/:lessonId/complete', auth, async (req, res) => {
       return res.status(404).json({ message: 'Not enrolled in this course' });
     }
     
-    if (!enrollment.completedLessons.includes(req.params.lessonId)) {
+    const lessonIndex = enrollment.completedLessons.indexOf(req.params.lessonId);
+    if (lessonIndex > -1) {
+      // Remove from completed
+      enrollment.completedLessons.splice(lessonIndex, 1);
+    } else {
+      // Add to completed
       enrollment.completedLessons.push(req.params.lessonId);
-      
-      const course = await Course.findById(req.params.courseId);
-      enrollment.progress = Math.round((enrollment.completedLessons.length / course.lessons.length) * 100);
-      
-      await enrollment.save();
     }
     
-    res.json({ message: 'Lesson completed', enrollment });
+    const course = await Course.findById(req.params.courseId);
+    enrollment.progress = Math.round((enrollment.completedLessons.length / course.lessons.length) * 100);
+    
+    await enrollment.save();
+    
+    res.json({ message: 'Lesson completion updated', enrollment });
   } catch (error) {
+    console.error('Complete lesson error:', error);
     res.status(500).json({ message: 'Server error' });
   }
 });
