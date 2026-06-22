@@ -273,7 +273,9 @@
             if (user) {
                 navActions.innerHTML = `
                     <a href="pages/profile.html" class="btn-outline btn-sm">${user.name}</a>
-                    <button class="btn-primary btn-sm" id="logout-btn">Log Out</button>
+                    <button class="btn-sm" id="logout-btn" style="color: #ef4444; background: rgba(239,68,68,0.1); padding: 10px 15px;">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
                 `;
                 document.getElementById('logout-btn').addEventListener('click', () => {
                     removeToken();
