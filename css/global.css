@@ -148,6 +148,19 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.85rem !important;
 }
 
+.btn-logout {
+    color: #fca5a5 !important;
+    background: rgba(239, 68, 68, 0.15) !important;
+    padding: 10px 15px !important;
+    font-weight: 600 !important;
+    border-radius: var(--radius-md) !important;
+}
+
+.btn-logout:hover {
+    background: rgba(239, 68, 68, 0.3) !important;
+    color: #fecaca !important;
+}
+
 .btn-full {
     width: 100%;
     justify-content: center;

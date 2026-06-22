@@ -78,16 +78,7 @@
 }
 
 .logout-btn {
-    color: #ef4444;
-    padding: 10px 15px;
-    border-radius: var(--radius-md);
-    background: rgba(239, 68, 68, 0.1);
-    font-weight: 500;
-    transition: var(--transition);
-}
-
-.logout-btn:hover {
-    background: rgba(239, 68, 68, 0.2);
+    /* Using global btn-logout class */
 }
 
 /* Main Content */
