@@ -7,7 +7,24 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   try {
-    const courses = await Course.find();
+    let courses = await Course.find();
+    // Map img to image and lesson url to videoUrl for backwards compatibility
+    courses = courses.map(course => {
+      const courseObj = course.toObject();
+      if (courseObj.img && !courseObj.image) {
+        courseObj.image = courseObj.img;
+      }
+      // Fix lessons
+      if (courseObj.lessons && courseObj.lessons.length) {
+        courseObj.lessons = courseObj.lessons.map(lesson => {
+          if (lesson.url && !lesson.videoUrl) {
+            lesson.videoUrl = lesson.url;
+          }
+          return lesson;
+        });
+      }
+      return courseObj;
+    });
     res.json(courses);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
@@ -16,11 +33,25 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
-    const course = await Course.findById(req.params.id);
+    let course = await Course.findById(req.params.id);
     if (!course) {
       return res.status(404).json({ message: 'Course not found' });
     }
-    res.json(course);
+    // Map img to image and lesson url to videoUrl for backwards compatibility
+    const courseObj = course.toObject();
+    if (courseObj.img && !courseObj.image) {
+      courseObj.image = courseObj.img;
+    }
+    // Fix lessons
+    if (courseObj.lessons && courseObj.lessons.length) {
+      courseObj.lessons = courseObj.lessons.map(lesson => {
+        if (lesson.url && !lesson.videoUrl) {
+          lesson.videoUrl = lesson.url;
+        }
+        return lesson;
+      });
+    }
+    res.json(courseObj);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }
@@ -55,11 +86,27 @@ router.post('/:id/enroll', auth, async (req, res) => {
 router.get('/user/enrolled', auth, async (req, res) => {
   try {
     const enrollments = await Enrollment.find({ userId: req.user.id }).populate('courseId');
-    // Map to frontend-friendly format
-    const formattedEnrollments = enrollments.map(e => ({
-      ...e._doc,
-      course: e.courseId
-    }));
+    // Map to frontend-friendly format and fix fields
+    const formattedEnrollments = enrollments.map(e => {
+      let courseObj = e.courseId.toObject();
+      // Fix image field
+      if (courseObj.img && !courseObj.image) {
+        courseObj.image = courseObj.img;
+      }
+      // Fix lessons
+      if (courseObj.lessons && courseObj.lessons.length) {
+        courseObj.lessons = courseObj.lessons.map(lesson => {
+          if (lesson.url && !lesson.videoUrl) {
+            lesson.videoUrl = lesson.url;
+          }
+          return lesson;
+        });
+      }
+      return {
+        ...e._doc,
+        course: courseObj
+      };
+    });
     res.json(formattedEnrollments);
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
