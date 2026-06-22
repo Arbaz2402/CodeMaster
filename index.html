@@ -266,34 +266,7 @@
         const loginForm = document.getElementById('login-form');
         const registerForm = document.getElementById('register-form');
 
-        // Check if user is logged in
-        function checkAuth() {
-            const user = getUser();
-            if (user) {
-                navActions.innerHTML = `
-                    <a href="pages/profile.html" class="btn-outline btn-sm">${user.name}</a>
-                    <button class="btn-sm btn-logout" id="logout-btn">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </button>
-                `;
-                document.getElementById('logout-btn').addEventListener('click', () => {
-                    removeToken();
-                    removeUser();
-                    checkAuth();
-                });
-            } else {
-                navActions.innerHTML = `
-                    <button class="btn-outline btn-sm" id="login-btn">Log In</button>
-                    <button class="btn-primary btn-sm" id="register-btn">Sign Up</button>
-                `;
-                document.getElementById('login-btn').addEventListener('click', () => {
-                    openModal('login');
-                });
-                document.getElementById('register-btn').addEventListener('click', () => {
-                    openModal('register');
-                });
-            }
-        }
+        // Check if user is logged in (uses global updateNavbar function which fetches latest data)
 
         function openModal(tab) {
             authModal.classList.add('show');
@@ -307,8 +280,14 @@
             authModal.classList.remove('show');
         }
 
-        loginBtn && loginBtn.addEventListener('click', () => openModal('login'));
-        registerBtn && registerBtn.addEventListener('click', () => openModal('register'));
+        // Use event delegation for dynamically added login/register buttons
+        navActions.addEventListener('click', (e) => {
+            if (e.target.id === 'login-btn' || e.target.closest('#login-btn')) {
+                openModal('login');
+            } else if (e.target.id === 'register-btn' || e.target.closest('#register-btn')) {
+                openModal('register');
+            }
+        });
         closeModalBtn.addEventListener('click', closeModal);
         window.addEventListener('click', (e) => {
             if (e.target === authModal) closeModal();
@@ -335,7 +314,7 @@
                 setToken(result.token);
                 setUser(result.user);
                 closeModal();
-                checkAuth();
+                updateNavbar(); // Use global updateNavbar function
                 alert('Login successful!');
             } catch (error) {
                 alert(error.message || 'Login failed');
@@ -354,7 +333,7 @@
                 setToken(result.token);
                 setUser(result.user);
                 closeModal();
-                checkAuth();
+                updateNavbar(); // Use global updateNavbar function
                 alert('Registration successful!');
             } catch (error) {
                 alert(error.message || 'Registration failed');
@@ -394,7 +373,6 @@
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            checkAuth();
             loadFeaturedCourses();
         });
     </script>
