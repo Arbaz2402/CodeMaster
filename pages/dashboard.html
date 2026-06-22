@@ -19,13 +19,12 @@
             </a>
         </div>
         <nav class="sidebar-nav">
-            <ul>
-                <li><a href="dashboard.html" class="active"><i class="fas fa-th-large"></i> Overview</a></li>
-                <li><a href="courses.html"><i class="fas fa-book"></i> My Courses</a></li>
-                <li><a href="playground.html"><i class="fas fa-terminal"></i> Playground</a></li>
-                <li><a href="quiz.html"><i class="fas fa-question-circle"></i> Quizzes</a></li>
-                <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
-            </ul>
+          <ul>
+            <li><a href="courses.html"><i class="fas fa-book"></i> My Courses</a></li>
+            <li><a href="playground.html"><i class="fas fa-terminal"></i> Playground</a></li>
+            <li><a href="quiz.html"><i class="fas fa-question-circle"></i> Quizzes</a></li>
+            <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+          </ul>
         </nav>
         <div class="sidebar-footer">
             <div class="user-info">
@@ -46,8 +45,7 @@
                 <i class="fas fa-bars"></i>
             </div>
             <div class="header-left">
-                <h2>Welcome back, <span class="text-gradient">John!</span></h2>
-                <p>You have 2 lessons to complete today.</p>
+                <h2>My Courses</h2>
             </div>
             <div class="header-right">
                 <div class="notification-btn"><i class="fas fa-bell"></i><span class="dot"></span></div>
@@ -55,100 +53,13 @@
             </div>
         </header>
 
-        <!-- Stats Grid -->
-        <section class="dashboard-stats">
-            <div class="stat-card card">
-                <div class="stat-icon purple"><i class="fas fa-graduation-cap"></i></div>
-                <div>
-                    <h3>4</h3>
-                    <p>Courses in Progress</p>
-                </div>
+        <!-- Continue Learning -->
+        <section class="continue-learning card">
+            <h3>Continue Learning</h3>
+            <div class="course-progress-list" id="enrolled-courses-list">
+                <p style="color: #94a3b8; text-align: center; padding: 2rem;">Loading your courses...</p>
             </div>
-            <div class="stat-card card">
-                <div class="stat-icon blue"><i class="fas fa-check-circle"></i></div>
-                <div>
-                    <h3>12</h3>
-                    <p>Completed Lessons</p>
-                </div>
-            </div>
-            <div class="stat-card card">
-                <div class="stat-icon orange"><i class="fas fa-clock"></i></div>
-                <div>
-                    <h3>45h</h3>
-                    <p>Learning Time</p>
-                </div>
-            </div>
-            <div class="stat-card card">
-                <div class="stat-icon green"><i class="fas fa-medal"></i></div>
-                <div>
-                    <h3>8</h3>
-                    <p>Certificates</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Analytics & Progress -->
-        <section class="dashboard-grid">
-            <div class="chart-container card">
-                <div class="card-header">
-                    <h3>Learning Activity</h3>
-                    <select>
-                        <option>This Week</option>
-                        <option>Last Week</option>
-                    </select>
-                </div>
-                <canvas id="activityChart"></canvas>
-            </div>
-
-            <div class="continue-learning card">
-                <h3>Continue Learning</h3>
-                <div class="course-progress-list">
-                    <div class="progress-item">
-                        <img src="https://picsum.photos/id/1/800/500" alt="React">
-                        <div class="progress-info">
-                            <div class="info-top">
-                                <h4>Full Stack React Mastery</h4>
-                                <span>65%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 65%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="progress-item">
-                        <img src="https://picsum.photos/id/2/800/500" alt="Python">
-                        <div class="progress-info">
-                            <div class="info-top">
-                                <h4>Python for Data Science</h4>
-                                <span>40%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 40%;"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <a href="courses.html" class="view-all">View All Courses <i class="fas fa-arrow-right"></i></a>
-            </div>
-        </section>
-
-        <!-- Recent Achievements -->
-        <section class="achievements-section card">
-            <h3>Recent Achievements</h3>
-            <div class="achievements-grid">
-                <div class="achievement-item">
-                    <div class="badge-icon"><i class="fas fa-bolt"></i></div>
-                    <p>Fast Learner</p>
-                </div>
-                <div class="achievement-item">
-                    <div class="badge-icon"><i class="fas fa-code"></i></div>
-                    <p>Code Warrior</p>
-                </div>
-                <div class="achievement-item">
-                    <div class="badge-icon"><i class="fas fa-fire"></i></div>
-                    <p>7 Day Streak</p>
-                </div>
-            </div>
+            <a href="courses.html" class="view-all">Browse All Courses <i class="fas fa-arrow-right"></i></a>
         </section>
     </main>
 
