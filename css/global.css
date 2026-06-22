@@ -110,7 +110,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Reusable Components */
 .btn-primary {
     background: linear-gradient(135deg, var(--primary), var(--accent));
-    color: white;
+    color: white !important;
     padding: 12px 28px;
     border-radius: var(--radius-md);
     font-weight: 600;
@@ -128,7 +128,7 @@ h1, h2, h3, h4, h5, h6 {
 .btn-outline {
     border: 1px solid var(--primary);
     background: transparent;
-    color: var(--text-primary);
+    color: white !important;
     padding: 12px 28px;
     border-radius: var(--radius-md);
     font-weight: 600;
