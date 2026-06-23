@@ -54,7 +54,9 @@ router.post('/register', async (req, res) => {
     };
     
     try {
-      await transporter.sendMail(mailOptions);
+      console.log('Sending confirmation email to:', user.email);
+      const emailResult = await transporter.sendMail(mailOptions);
+      console.log('Email sent successfully:', emailResult);
     } catch (emailError) {
       console.error('Email sending failed:', emailError);
     }
@@ -131,9 +133,11 @@ router.post('/resend-confirmation', async (req, res) => {
     };
     
     try {
-      await transporter.sendMail(mailOptions);
+      console.log('Resending confirmation email to:', user.email);
+      const emailResult = await transporter.sendMail(mailOptions);
+      console.log('Resent email sent successfully:', emailResult);
     } catch (emailError) {
-      console.error('Email sending failed:', emailError);
+      console.error('Resend email failed:', emailError);
     }
     
     res.json({ message: 'Confirmation email resent' });

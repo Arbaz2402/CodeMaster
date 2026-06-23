@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Confirm Email - CodeMaster</title>
+  <title>Confirm Email | CodeMaster</title>
   
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/global.css">
 </head>
 <body class="auth-page">
   <!-- Floating Background Elements -->
@@ -40,9 +40,20 @@
       </div>
     </div>
     
+    <!-- Resend Form -->
+    <div id="resend-form" style="margin-top: 2rem;">
+      <h3>Resend Confirmation Email</h3>
+      <form id="resend-confirmation-form">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="resend-email" required>
+        </div>
+        <button type="submit" class="btn-primary">Resend Email</button>
+      </form>
+    </div>
+    
     <div class="auth-footer">
-      <p>Didn't receive the email? <a href="#" id="resend-confirmation">Resend</a></p>
-      <p>Back to <a href="login.html">Login</a></p>
+      <p>Back to <a href="../index.html">Home</a></p>
     </div>
   </div>
 
