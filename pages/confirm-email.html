@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirm Email - CodeMaster</title>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- AOS Animation -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="auth-page">
+  <!-- Floating Background Elements -->
+  <div class="floating-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+
+  <!-- Auth Card -->
+  <div class="auth-card" data-aos="fade-up">
+    <div class="auth-logo">
+      <i class="fas fa-check-circle"></i>
+      <h1>Confirm Your Email</h1>
+      <p>We've sent a confirmation email to your address</p>
+    </div>
+    
+    <div id="confirmation-status" class="confirmation-status">
+      <div class="confirmation-loading">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Confirming your email...</p>
+      </div>
+    </div>
+    
+    <div class="auth-footer">
+      <p>Didn't receive the email? <a href="#" id="resend-confirmation">Resend</a></p>
+      <p>Back to <a href="login.html">Login</a></p>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+  </script>
+  <script src="../js/api.js"></script>
+  <script src="../js/confirm-email.js"></script>
+</body>
+</html>

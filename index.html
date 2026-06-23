@@ -330,11 +330,9 @@
                     document.getElementById('register-email').value,
                     document.getElementById('register-password').value
                 );
-                setToken(result.token);
-                setUser(result.user);
                 closeModal();
-                updateNavbar(); // Use global updateNavbar function
-                alert('Registration successful!');
+                alert(result.message || 'Registration successful!');
+                window.location.href = 'pages/confirm-email.html';
             } catch (error) {
                 alert(error.message || 'Registration failed');
             }

@@ -39,7 +39,7 @@ router.post('/register', async (req, res) => {
     await user.save();
     
     // Send confirmation email
-    const confirmationUrl = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/confirm-email?token=${confirmationToken}`;
+    const confirmationUrl = `${process.env.FRONTEND_URL || 'https://codemaster-dusky.vercel.app'}/pages/confirm-email.html?token=${confirmationToken}`;
     
     const mailOptions = {
       from: process.env.EMAIL_USER,
@@ -59,17 +59,9 @@ router.post('/register', async (req, res) => {
       console.error('Email sending failed:', emailError);
     }
     
-    const payload = { userId: user.id };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' });
-    
+    // Don't send token - user needs to confirm email first
     res.status(201).json({
-      token,
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        emailConfirmed: user.emailConfirmed
-      }
+      message: 'Registration successful! Please check your email to confirm your account.'
     });
   } catch (error) {
     console.error('Registration error:', error);
@@ -103,10 +95,15 @@ router.post('/confirm-email', async (req, res) => {
   }
 });
 
-// Resend confirmation email
-router.post('/resend-confirmation', auth, async (req, res) => {
+// Resend confirmation email (no auth needed, just email)
+router.post('/resend-confirmation', async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
     
     if (user.emailConfirmed) {
       return res.status(400).json({ message: 'Email already confirmed' });
@@ -119,7 +116,7 @@ router.post('/resend-confirmation', auth, async (req, res) => {
     await user.save();
     
     // Send confirmation email
-    const confirmationUrl = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/confirm-email?token=${confirmationToken}`;
+    const confirmationUrl = `${process.env.FRONTEND_URL || 'https://codemaster-dusky.vercel.app'}/pages/confirm-email.html?token=${confirmationToken}`;
     
     const mailOptions = {
       from: process.env.EMAIL_USER,
@@ -154,6 +151,10 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
+    }
+    
+    if (!user.emailConfirmed) {
+      return res.status(400).json({ message: 'Please confirm your email first' });
     }
     
     const isMatch = await user.comparePassword(password);
