@@ -6,12 +6,25 @@ const User = require('../models/User');
 const auth = require('../middleware/auth');
 const router = express.Router();
 
+// Log environment variables
+console.log('EMAIL_USER:', process.env.EMAIL_USER ? 'Set' : 'Not set');
+console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? 'Set' : 'Not set');
+
 // Configure Nodemailer
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
+  }
+});
+
+// Verify transporter connection
+transporter.verify((error, success) => {
+  if (error) {
+    console.error('Nodemailer transporter error:', error);
+  } else {
+    console.log('Nodemailer transporter is ready to send emails');
   }
 });
 
