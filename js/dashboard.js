@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const course = enrollment.course;
             const progress = enrollment.progress || 0;
             return `
-              <div class="progress-item">
+              <div class="progress-item" style="cursor: pointer;" data-course-id="${course._id}">
                 <img src="${course.image}" alt="${course.title}">
                 <div class="progress-info">
                   <div class="info-top">
@@ -62,6 +62,15 @@ document.addEventListener('DOMContentLoaded', async () => {
               </div>
             `;
           }).join('');
+
+          // Add click listeners to each progress item
+          const progressItems = courseProgressList.querySelectorAll('.progress-item');
+          progressItems.forEach(item => {
+            item.addEventListener('click', () => {
+              const courseId = item.getAttribute('data-course-id');
+              window.location.href = `video-learning.html`;
+            });
+          });
         }
       }
     } catch (error) {
