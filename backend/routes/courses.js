@@ -1,9 +1,29 @@
+/**
+ * @swagger
+ * tags:
+ *   name: Courses
+ *   description: Course management
+ */
+
 const express = require('express');
 const Course = require('../models/Course');
 const Enrollment = require('../models/Enrollment');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
 const router = express.Router();
+
+/**
+ * @swagger
+ * /api/courses:
+ *   get:
+ *     summary: Get all courses
+ *     tags: [Courses]
+ *     responses:
+ *       200:
+ *         description: List of all courses
+ *       500:
+ *         description: Server error
+ */
 
 router.get('/', async (req, res) => {
   try {
@@ -31,6 +51,25 @@ router.get('/', async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/courses/{id}:
+ *   get:
+ *     summary: Get a single course
+ *     tags: [Courses]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Course ID
+ *     responses:
+ *       200:
+ *         description: Course details
+ *       404:
+ *         description: Course not found
+ */
 router.get('/:id', async (req, res) => {
   try {
     let course = await Course.findById(req.params.id);
@@ -57,6 +96,29 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/courses/{id}/enroll:
+ *   post:
+ *     summary: Enroll in a course
+ *     tags: [Courses]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Course ID
+ *     responses:
+ *       200:
+ *         description: Enrolled successfully
+ *       400:
+ *         description: Already enrolled
+ *       404:
+ *         description: Course not found
+ */
 router.post('/:id/enroll', auth, async (req, res) => {
   try {
     const course = await Course.findById(req.params.id);
@@ -83,6 +145,18 @@ router.post('/:id/enroll', auth, async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/courses/user/enrolled:
+ *   get:
+ *     summary: Get enrolled courses
+ *     tags: [Courses]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: List of enrolled courses
+ */
 router.get('/user/enrolled', auth, async (req, res) => {
   try {
     const enrollments = await Enrollment.find({ userId: req.user.id }).populate('courseId');
@@ -113,6 +187,33 @@ router.get('/user/enrolled', auth, async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/courses/{courseId}/lessons/{lessonId}/complete:
+ *   put:
+ *     summary: Mark lesson as complete/incomplete
+ *     tags: [Courses]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: courseId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Course ID
+ *       - in: path
+ *         name: lessonId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Lesson ID
+ *     responses:
+ *       200:
+ *         description: Lesson completion updated
+ *       404:
+ *         description: Not enrolled
+ */
 router.put('/:courseId/lessons/:lessonId/complete', auth, async (req, res) => {
   try {
     const enrollment = await Enrollment.findOne({ userId: req.user.id, courseId: req.params.courseId });
