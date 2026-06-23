@@ -1,10 +1,3 @@
-/**
- * @swagger
- * tags:
- *   name: Auth
- *   description: Authentication management
- */
-
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
@@ -16,32 +9,6 @@ const router = express.Router();
 // Configure SendGrid
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 console.log('SendGrid configured');
-
-/**
- * @swagger
- * /api/auth/register:
- *   post:
- *     summary: Register a new user
- *     tags: [Auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *               email:
- *                 type: string
- *               password:
- *                 type: string
- *     responses:
- *       201:
- *         description: User registered successfully
- *       400:
- *         description: User already exists
- */
 
 // Register user
 router.post('/register', async (req, res) => {
@@ -102,28 +69,6 @@ router.post('/register', async (req, res) => {
   }
 });
 
-/**
- * @swagger
- * /api/auth/confirm-email:
- *   post:
- *     summary: Confirm user email
- *     tags: [Auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               token:
- *                 type: string
- *     responses:
- *       200:
- *         description: Email confirmed
- *       400:
- *         description: Invalid or expired token
- */
-
 // Confirm email
 router.post('/confirm-email', async (req, res) => {
   try {
@@ -149,28 +94,6 @@ router.post('/confirm-email', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
-/**
- * @swagger
- * /api/auth/resend-confirmation:
- *   post:
- *     summary: Resend confirmation email
- *     tags: [Auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               email:
- *                 type: string
- *     responses:
- *       200:
- *         description: Confirmation email resent
- *       404:
- *         description: User not found
- */
 
 // Resend confirmation email (no auth needed, just email)
 router.post('/resend-confirmation', async (req, res) => {
@@ -224,30 +147,6 @@ router.post('/resend-confirmation', async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
-/**
- * @swagger
- * /api/auth/login:
- *   post:
- *     summary: Login user
- *     tags: [Auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               email:
- *                 type: string
- *               password:
- *                 type: string
- *     responses:
- *       200:
- *         description: Login successful
- *       400:
- *         description: Invalid credentials
- */
 
 // Login
 router.post('/login', async (req, res) => {

@@ -1,27 +1,7 @@
-/**
- * @swagger
- * tags:
- *   name: Playgrounds
- *   description: Playground project management
- */
-
 const express = require('express');
 const Playground = require('../models/Playground');
 const auth = require('../middleware/auth');
 const router = express.Router();
-
-/**
- * @swagger
- * /api/playgrounds:
- *   get:
- *     summary: Get all playground projects for current user
- *     tags: [Playgrounds]
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: List of playground projects
- */
 
 // Get all playground projects for current user
 router.get('/', auth, async (req, res) => {
@@ -33,28 +13,6 @@ router.get('/', auth, async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
-/**
- * @swagger
- * /api/playgrounds/{id}:
- *   get:
- *     summary: Get a specific playground project
- *     tags: [Playgrounds]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: Project ID
- *     responses:
- *       200:
- *         description: Playground project details
- *       404:
- *         description: Project not found
- */
 
 // Get a specific playground project
 router.get('/:id', auth, async (req, res) => {
@@ -74,34 +32,6 @@ router.get('/:id', auth, async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
-/**
- * @swagger
- * /api/playgrounds:
- *   post:
- *     summary: Create a new playground project
- *     tags: [Playgrounds]
- *     security:
- *       - bearerAuth: []
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               title:
- *                 type: string
- *               html:
- *                 type: string
- *               css:
- *                 type: string
- *               js:
- *                 type: string
- *     responses:
- *       200:
- *         description: Created playground project
- */
 
 // Create a new playground project
 router.post('/', auth, async (req, res) => {
@@ -123,43 +53,6 @@ router.post('/', auth, async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
-/**
- * @swagger
- * /api/playgrounds/{id}:
- *   put:
- *     summary: Update a playground project
- *     tags: [Playgrounds]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: Project ID
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               title:
- *                 type: string
- *               html:
- *                 type: string
- *               css:
- *                 type: string
- *               js:
- *                 type: string
- *     responses:
- *       200:
- *         description: Updated playground project
- *       404:
- *         description: Project not found
- */
 
 // Update a playground project
 router.put('/:id', auth, async (req, res) => {
@@ -188,28 +81,6 @@ router.put('/:id', auth, async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-
-/**
- * @swagger
- * /api/playgrounds/{id}:
- *   delete:
- *     summary: Delete a playground project
- *     tags: [Playgrounds]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: Project ID
- *     responses:
- *       200:
- *         description: Project deleted
- *       404:
- *         description: Project not found
- */
 
 // Delete a playground project
 router.delete('/:id', auth, async (req, res) => {
