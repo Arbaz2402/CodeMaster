@@ -44,28 +44,45 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ message: 'User already exists' });
     }
     
-    // Create user with email already confirmed (optional for now)
+    // Generate confirmation token
+    const confirmationToken = crypto.randomBytes(32).toString('hex');
+    
     user = new User({ 
       name, 
       email, 
       password,
-      emailConfirmed: true // Skip email confirmation for now
+      confirmationToken,
+      confirmationTokenExpires: Date.now() + 3600000 // 1 hour
     });
     
     await user.save();
     
-    // Automatically log the user in
-    const payload = { userId: user.id };
-    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' });
+    // Send confirmation email
+    const confirmationUrl = `${process.env.FRONTEND_URL || 'https://codemaster-dusky.vercel.app'}/pages/confirm-email.html?token=${confirmationToken}`;
     
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: user.email,
+      subject: 'Confirm your email - CodeMaster',
+      html: `
+        <h1>Welcome to CodeMaster!</h1>
+        <p>Please confirm your email by clicking the link below:</p>
+        <a href="${confirmationUrl}" style="display: inline-block; padding: 10px 20px; background: #6366f1; color: white; text-decoration: none; border-radius: 8px;">Confirm Email</a>
+        <p>This link expires in 1 hour.</p>
+      `
+    };
+    
+    try {
+      console.log('Sending confirmation email to:', user.email);
+      const emailResult = await transporter.sendMail(mailOptions);
+      console.log('Email sent successfully:', emailResult);
+    } catch (emailError) {
+      console.error('Email sending failed:', emailError);
+    }
+    
+    // Don't send token - user needs to confirm email first
     res.status(201).json({
-      token,
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        emailConfirmed: user.emailConfirmed
-      }
+      message: 'Registration successful! Please check your email to confirm your account.'
     });
   } catch (error) {
     console.error('Registration error:', error);
@@ -157,6 +174,10 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
+    }
+    
+    if (!user.emailConfirmed) {
+      return res.status(400).json({ message: 'Please confirm your email first' });
     }
     
     const isMatch = await user.comparePassword(password);
