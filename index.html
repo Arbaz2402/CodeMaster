@@ -330,9 +330,12 @@
                     document.getElementById('register-email').value,
                     document.getElementById('register-password').value
                 );
+                setToken(result.token);
+                setUser(result.user);
                 closeModal();
-                alert(result.message || 'Registration successful!');
-                window.location.href = 'pages/confirm-email.html';
+                updateNavbar();
+                alert('Registration successful!');
+                window.location.href = 'pages/dashboard.html';
             } catch (error) {
                 alert(error.message || 'Registration failed');
             }
