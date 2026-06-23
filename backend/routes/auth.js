@@ -216,9 +216,9 @@ router.post('/forgot-password', async (req, res) => {
     // Send reset email
     const resetUrl = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/reset-password?token=${resetToken}`;
     
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
+    const msg = {
       to: user.email,
+      from: process.env.SENDGRID_FROM_EMAIL || 'noreply@codemaster.com',
       subject: 'Reset your password - CodeMaster',
       html: `
         <h1>Password Reset Request</h1>
@@ -229,9 +229,12 @@ router.post('/forgot-password', async (req, res) => {
     };
     
     try {
-      await transporter.sendMail(mailOptions);
+      await sgMail.send(msg);
     } catch (emailError) {
       console.error('Email sending failed:', emailError);
+      if (emailError.response) {
+        console.error(emailError.response.body);
+      }
     }
     
     res.json({ message: 'Password reset email sent' });
