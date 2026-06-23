@@ -1,38 +1,14 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const nodemailer = require('nodemailer');
+const sgMail = require('@sendgrid/mail');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
 const router = express.Router();
 
-// Log environment variables
-console.log('EMAIL_USER:', process.env.EMAIL_USER ? 'Set' : 'Not set');
-console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? 'Set' : 'Not set');
-
-// Configure Nodemailer with explicit SMTP settings
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true, // true for 465, false for other ports
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  },
-  tls: {
-    rejectUnauthorized: false
-  },
-  family: 4 // Force IPv4
-});
-
-// Verify transporter connection
-transporter.verify((error, success) => {
-  if (error) {
-    console.error('Nodemailer transporter error:', error);
-  } else {
-    console.log('Nodemailer transporter is ready to send emails');
-  }
-});
+// Configure SendGrid
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+console.log('SendGrid configured');
 
 // Register user
 router.post('/register', async (req, res) => {
@@ -60,9 +36,9 @@ router.post('/register', async (req, res) => {
     // Send confirmation email
     const confirmationUrl = `${process.env.FRONTEND_URL || 'https://codemaster-dusky.vercel.app'}/pages/confirm-email.html?token=${confirmationToken}`;
     
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
+    const msg = {
       to: user.email,
+      from: process.env.SENDGRID_FROM_EMAIL || 'noreply@codemaster.com',
       subject: 'Confirm your email - CodeMaster',
       html: `
         <h1>Welcome to CodeMaster!</h1>
@@ -74,10 +50,13 @@ router.post('/register', async (req, res) => {
     
     try {
       console.log('Sending confirmation email to:', user.email);
-      const emailResult = await transporter.sendMail(mailOptions);
-      console.log('Email sent successfully:', emailResult);
+      await sgMail.send(msg);
+      console.log('Email sent successfully');
     } catch (emailError) {
       console.error('Email sending failed:', emailError);
+      if (emailError.response) {
+        console.error(emailError.response.body);
+      }
     }
     
     // Don't send token - user needs to confirm email first
@@ -139,9 +118,9 @@ router.post('/resend-confirmation', async (req, res) => {
     // Send confirmation email
     const confirmationUrl = `${process.env.FRONTEND_URL || 'https://codemaster-dusky.vercel.app'}/pages/confirm-email.html?token=${confirmationToken}`;
     
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
+    const msg = {
       to: user.email,
+      from: process.env.SENDGRID_FROM_EMAIL || 'noreply@codemaster.com',
       subject: 'Confirm your email - CodeMaster',
       html: `
         <h1>Confirm Your Email</h1>
@@ -153,10 +132,13 @@ router.post('/resend-confirmation', async (req, res) => {
     
     try {
       console.log('Resending confirmation email to:', user.email);
-      const emailResult = await transporter.sendMail(mailOptions);
-      console.log('Resent email sent successfully:', emailResult);
+      await sgMail.send(msg);
+      console.log('Resent email sent successfully');
     } catch (emailError) {
       console.error('Resend email failed:', emailError);
+      if (emailError.response) {
+        console.error(emailError.response.body);
+      }
     }
     
     res.json({ message: 'Confirmation email resent' });
