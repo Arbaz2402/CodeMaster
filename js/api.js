@@ -65,16 +65,6 @@ const authApi = {
   
   getMe: () => apiFetch('/auth/me'),
   
-  confirmEmail: (token) => apiFetch('/auth/confirm-email', {
-    method: 'POST',
-    body: JSON.stringify({ token })
-  }),
-  
-  resendConfirmation: (email) => apiFetch('/auth/resend-confirmation', {
-    method: 'POST',
-    body: JSON.stringify({ email })
-  }),
-  
   forgotPassword: (email) => apiFetch('/auth/forgot-password', {
     method: 'POST',
     body: JSON.stringify({ email })

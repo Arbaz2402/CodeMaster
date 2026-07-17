@@ -1,14 +1,8 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
-const sgMail = require('@sendgrid/mail');
 const User = require('../models/User');
 const auth = require('../middleware/auth');
 const router = express.Router();
-
-// Configure SendGrid
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-console.log('SendGrid configured');
 
 // Register user
 router.post('/register', async (req, res) => {
@@ -20,131 +14,42 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ message: 'User already exists' });
     }
     
-    // Generate confirmation token
-    const confirmationToken = crypto.randomBytes(32).toString('hex');
-    
     user = new User({ 
       name, 
       email, 
-      password,
-      confirmationToken,
-      confirmationTokenExpires: Date.now() + 3600000 // 1 hour
+      password
     });
     
     await user.save();
     
-    // Send confirmation email
-    const confirmationUrl = `${process.env.FRONTEND_URL || 'https://codemaster-dusky.vercel.app'}/pages/confirm-email.html?token=${confirmationToken}`;
+    // Generate token immediately
+    const payload = { userId: user.id };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' });
     
-    const msg = {
-      to: user.email,
-      from: process.env.SENDGRID_FROM_EMAIL || 'noreply@codemaster.com',
-      subject: 'Confirm your email - CodeMaster',
-      html: `
-        <h1>Welcome to CodeMaster!</h1>
-        <p>Please confirm your email by clicking the link below:</p>
-        <a href="${confirmationUrl}" style="display: inline-block; padding: 10px 20px; background: #6366f1; color: white; text-decoration: none; border-radius: 8px;">Confirm Email</a>
-        <p>This link expires in 1 hour.</p>
-      `
-    };
-    
-    try {
-      console.log('Sending confirmation email to:', user.email);
-      await sgMail.send(msg);
-      console.log('Email sent successfully');
-    } catch (emailError) {
-      console.error('Email sending failed:', emailError);
-      if (emailError.response) {
-        console.error(emailError.response.body);
-      }
-    }
-    
-    // Don't send token - user needs to confirm email first
     res.status(201).json({
-      message: 'Registration successful! Please check your email to confirm your account.'
+      token,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        emailConfirmed: user.emailConfirmed,
+        bio: user.bio,
+        about: user.about,
+        avatar: user.avatar,
+        skills: user.skills,
+        streak: user.streak,
+        totalCourses: user.totalCourses,
+        totalHours: user.totalHours,
+        points: user.points,
+        achievements: user.achievements,
+        certificates: user.certificates,
+        activityData: user.activityData,
+        recentActivity: user.recentActivity
+      }
     });
   } catch (error) {
     console.error('Registration error:', error);
     res.status(500).json({ message: 'Server error', error: error.message });
-  }
-});
-
-// Confirm email
-router.post('/confirm-email', async (req, res) => {
-  try {
-    const { token } = req.body;
-    
-    const user = await User.findOne({
-      confirmationToken: token,
-      confirmationTokenExpires: { $gt: Date.now() }
-    });
-    
-    if (!user) {
-      return res.status(400).json({ message: 'Invalid or expired token' });
-    }
-    
-    user.emailConfirmed = true;
-    user.confirmationToken = null;
-    user.confirmationTokenExpires = null;
-    await user.save();
-    
-    res.json({ message: 'Email confirmed successfully' });
-  } catch (error) {
-    console.error('Email confirmation error:', error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
-
-// Resend confirmation email (no auth needed, just email)
-router.post('/resend-confirmation', async (req, res) => {
-  try {
-    const { email } = req.body;
-    const user = await User.findOne({ email });
-    
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-    
-    if (user.emailConfirmed) {
-      return res.status(400).json({ message: 'Email already confirmed' });
-    }
-    
-    // Generate new confirmation token
-    const confirmationToken = crypto.randomBytes(32).toString('hex');
-    user.confirmationToken = confirmationToken;
-    user.confirmationTokenExpires = Date.now() + 3600000;
-    await user.save();
-    
-    // Send confirmation email
-    const confirmationUrl = `${process.env.FRONTEND_URL || 'https://codemaster-dusky.vercel.app'}/pages/confirm-email.html?token=${confirmationToken}`;
-    
-    const msg = {
-      to: user.email,
-      from: process.env.SENDGRID_FROM_EMAIL || 'noreply@codemaster.com',
-      subject: 'Confirm your email - CodeMaster',
-      html: `
-        <h1>Confirm Your Email</h1>
-        <p>Please confirm your email by clicking the link below:</p>
-        <a href="${confirmationUrl}" style="display: inline-block; padding: 10px 20px; background: #6366f1; color: white; text-decoration: none; border-radius: 8px;">Confirm Email</a>
-        <p>This link expires in 1 hour.</p>
-      `
-    };
-    
-    try {
-      console.log('Resending confirmation email to:', user.email);
-      await sgMail.send(msg);
-      console.log('Resent email sent successfully');
-    } catch (emailError) {
-      console.error('Resend email failed:', emailError);
-      if (emailError.response) {
-        console.error(emailError.response.body);
-      }
-    }
-    
-    res.json({ message: 'Confirmation email resent' });
-  } catch (error) {
-    console.error('Resend confirmation error:', error);
-    res.status(500).json({ message: 'Server error' });
   }
 });
 
@@ -156,10 +61,6 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ message: 'Invalid credentials' });
-    }
-    
-    if (!user.emailConfirmed) {
-      return res.status(400).json({ message: 'Please confirm your email first' });
     }
     
     const isMatch = await user.comparePassword(password);

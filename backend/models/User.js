@@ -17,15 +17,7 @@ const userSchema = new mongoose.Schema({
   },
   emailConfirmed: {
     type: Boolean,
-    default: false
-  },
-  confirmationToken: {
-    type: String,
-    default: null
-  },
-  confirmationTokenExpires: {
-    type: Date,
-    default: null
+    default: true
   },
   resetToken: {
     type: String,
